@@ -1,0 +1,55 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Cart - Electronic Component Store</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>Your Cart</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="cart.html">Cart</a>
+      <a href="admin.html">Admin</a>
+    </nav>
+  </header>
+  <main class="products" id="cart-list"></main>
+  <div style="text-align: center; padding: 1rem;">
+    <button onclick="placeOrder()">Place Order</button>
+  </div>
+  <script>
+    const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+    const cartList = document.getElementById('cart-list');
+
+    if(cart.length === 0) {
+      cartList.innerHTML = '<p style="text-align:center">Your cart is empty.</p>';
+    } else {
+      cart.forEach((p, index) => {
+        const div = document.createElement('div');
+        div.className = 'product';
+        div.innerHTML = `
+          <h3>${p.name}</h3>
+          <p>₹${p.price}</p>
+        `;
+        cartList.appendChild(div);
+      });
+    }
+
+    function placeOrder() {
+      const orders = JSON.parse(localStorage.getItem('orders') || '[]');
+      const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+      if (cart.length === 0) {
+        alert("Your cart is empty.");
+        return;
+      }
+      orders.push({ id: Date.now(), items: cart });
+      localStorage.setItem('orders', JSON.stringify(orders));
+      localStorage.removeItem('cart');
+      alert("Order placed successfully!");
+      window.location.href = "index.html";
+    }
+  </script>
+</body>
+</html>

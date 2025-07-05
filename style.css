@@ -1,0 +1,33 @@
+
+body {
+  font-family: sans-serif;
+  margin: 0;
+  padding: 0;
+}
+header {
+  background: #007BFF;
+  color: white;
+  padding: 1rem;
+  text-align: center;
+}
+nav a {
+  color: white;
+  margin: 0 10px;
+  text-decoration: none;
+}
+.hero {
+  padding: 2rem;
+  background: #f0f0f0;
+  text-align: center;
+}
+.products {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  padding: 1rem;
+}
+.product {
+  border: 1px solid #ccc;
+  padding: 1rem;
+  background: white;
+}
